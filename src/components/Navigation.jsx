@@ -33,7 +33,6 @@ export const Navigation = () => {
       bg={bg}
       color={color}
     >
-      {/* Logo or Brand Name */}
       <Flex align="center" mr={5}>
         <Box as="h1" fontSize="xl" fontWeight="bold" letterSpacing="tight">
           EventApp
