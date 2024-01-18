@@ -7,7 +7,7 @@ export const AddEventPage = () => {
 
   const handleAddEvent = async (newEventData) => {
     // Convert categoryIds from array to string for the server
-    newEventData.categoryIds = newEventData.categoryIds.join(",");
+    newEventData.categoryIds = newEventData.categoryIds.map(String);
 
     try {
       const response = await fetch("http://localhost:3000/events", {

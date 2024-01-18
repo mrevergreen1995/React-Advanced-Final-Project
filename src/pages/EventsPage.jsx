@@ -22,7 +22,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { EventForm } from "./EventForm";
+import EventForm from "./EventForm"; // Import EventForm
 
 export const EventsPage = () => {
   // States for handling events, search term, category, and categories list
@@ -38,22 +38,28 @@ export const EventsPage = () => {
   // Fetch events and categories from the server
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await fetch("http://localhost:3000/events");
-      if (response.ok) {
+      try {
+        const response = await fetch("http://localhost:3000/events");
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
         const data = await response.json();
         setEvents(data);
-      } else {
-        console.error("Failed to fetch events");
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
       }
     };
 
     const fetchCategories = async () => {
-      const response = await fetch("http://localhost:3000/categories");
-      if (response.ok) {
+      try {
+        const response = await fetch("http://localhost:3000/categories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
         const data = await response.json();
         setCategories(data);
-      } else {
-        console.error("Failed to fetch categories");
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
       }
     };
 

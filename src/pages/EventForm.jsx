@@ -62,9 +62,34 @@ export const EventForm = ({ onSubmit }) => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(eventData);
+    try {
+      const response = await fetch("http://localhost:3000/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(eventData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Reset form data after successful submission
+      setEventData({
+        title: "",
+        description: "",
+        image: "",
+        startTime: "",
+        endTime: "",
+        categoryIds: [],
+      });
+
+      // Trigger parent component's callback
+      onSubmit(eventData);
+    } catch (error) {
+      console.error("Error adding event:", error);
+    }
   };
 
   return (
