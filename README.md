@@ -19,3 +19,6 @@ git clone https://github.com/mrevergreen1995/React-Advanced-Final-Project.git
 cd React-Advanced-Final-Project
 npm install
 npm start
+
+cd data
+json-server events.json
